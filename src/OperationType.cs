@@ -1,10 +1,12 @@
 ﻿using Intellenum;
+using Soenneker.Attributes.PublicOpenApiObject;
 
 namespace Soenneker.Enums.OperationTypes;
 
 /// <summary>
 /// An enumeration for common mathematical operations
 /// </summary>
+[PublicOpenApiObject]
 [Intellenum<string>]
 public partial class OperatorType
 {
