@@ -8,7 +8,7 @@ namespace Soenneker.Enums.OperationTypes;
 /// </summary>
 [PublicOpenApiObject]
 [Intellenum<string>]
-public partial class OperatorType
+public sealed partial class OperatorType
 {
     public static readonly OperatorType NotEqual = new(nameof(NotEqual));
     public static readonly OperatorType Equal = new(nameof(Equal));
