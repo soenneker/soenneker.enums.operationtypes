@@ -1,4 +1,4 @@
-﻿using Intellenum;
+using Soenneker.Gen.EnumValues;
 using Soenneker.Attributes.PublicOpenApiObject;
 
 namespace Soenneker.Enums.OperationTypes;
@@ -7,7 +7,7 @@ namespace Soenneker.Enums.OperationTypes;
 /// An enumeration for common mathematical operations
 /// </summary>
 [PublicOpenApiObject]
-[Intellenum<string>]
+[EnumValue<string>]
 public sealed partial class OperatorType
 {
     public static readonly OperatorType NotEqual = new(nameof(NotEqual));
