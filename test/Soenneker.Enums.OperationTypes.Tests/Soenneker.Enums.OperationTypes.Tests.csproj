@@ -27,7 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Soenneker.Enums.OperationTypes.csproj" />
+        <ProjectReference Include="..\..\src\Soenneker.Enums.OperationTypes\Soenneker.Enums.OperationTypes.csproj" />
     </ItemGroup>
 
     <ItemGroup>
