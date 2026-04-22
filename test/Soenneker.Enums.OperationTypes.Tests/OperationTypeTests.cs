@@ -1,16 +1,15 @@
-﻿using Soenneker.Tests.FixturedUnit;
-using Xunit;
+using Soenneker.Tests.HostedUnit;
 
 namespace Soenneker.Enums.OperationTypes.Tests;
 
-[Collection("Collection")]
-public class OperationTypeTests : FixturedUnitTest
+[ClassDataSource<Host>(Shared = SharedType.PerTestSession)]
+public class OperationTypeTests : HostedUnitTest
 {
-    public OperationTypeTests(Fixture fixture, ITestOutputHelper output) : base(fixture, output)
+    public OperationTypeTests(Host host) : base(host)
     {
     }
 
-    [Fact]
+    [Test]
     public void Default()
     {
 
