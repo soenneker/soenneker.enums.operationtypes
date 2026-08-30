@@ -5,7 +5,7 @@
 
 # Soenneker.Enums.OperationTypes
 
-Identifies a comparison or matching operator used to evaluate a filter condition.
+A string-backed enum-value type for representing comparison and matching operators in filter contracts.
 
 ## Install
 
@@ -13,23 +13,28 @@ Identifies a comparison or matching operator used to evaluate a filter condition
 dotnet add package Soenneker.Enums.OperationTypes
 ```
 
-## What you get
+## Usage
 
-- `OperatorType` — Identifies a comparison or matching operator used to evaluate a filter condition.
+```csharp
+using Soenneker.Enums.OperationTypes;
 
-## API at a glance
+OperatorType operation = OperatorType.GreaterThanOrEqual;
+string wireValue = operation.Value; // "GreaterThanOrEqual"
 
-| API | What it does | Result / important behavior |
-| --- | --- | --- |
-| `OperatorType.Equal` | The candidate value must equal the comparison value. | The candidate value must equal the comparison value. |
-| `OperatorType.NotEqual` | The candidate value must not equal the comparison value. | The candidate value must not equal the comparison value. |
-| `OperatorType.LessThan` | The candidate value must be less than the comparison value. | The candidate value must be less than the comparison value. |
-| `OperatorType.LessThanOrEqual` | The candidate value must be less than or equal to the comparison value. | The candidate value must be less than or equal to the comparison value. |
-| `OperatorType.GreaterThan` | The candidate value must be greater than the comparison value. | The candidate value must be greater than the comparison value. |
-| `OperatorType.GreaterThanOrEqual` | The candidate value must be greater than or equal to the comparison value. | The candidate value must be greater than or equal to the comparison value. |
-| `OperatorType.In` | The candidate value must occur in the supplied set. | The candidate value must occur in the supplied set. |
-| `OperatorType.NotIn` | The candidate value must not occur in the supplied set. | The candidate value must not occur in the supplied set. |
-| `OperatorType.Contains` | The candidate value must contain the supplied value. | The candidate value must contain the supplied value. |
-| `OperatorType.StartsWith` | The candidate value must begin with the supplied value. | The candidate value must begin with the supplied value. |
-| `OperatorType.EndsWith` | The candidate value must end with the supplied value. | The candidate value must end with the supplied value. |
-| `OperatorType.Exists` | The candidate field or value must exist. | Returns `true` when at least one matching document exists; otherwise, `false`. |
+if (OperatorType.TryFromValue(input, out OperatorType? parsed))
+{
+    // Translate parsed through an allowlisted query implementation
+}
+```
+
+Available values:
+
+- Equality: `Equal`, `NotEqual`
+- Ordering: `LessThan`, `LessThanOrEqual`, `GreaterThan`, `GreaterThanOrEqual`
+- Set membership: `In`, `NotIn`
+- Text or collection matching: `Contains`, `StartsWith`, `EndsWith`
+- Presence: `Exists`
+
+`System.Text.Json` serializes the type as the shown string value. `FromValue` throws for unknown input; use `TryFromValue` when parsing filters. `FromName` and `TryFromName` are also generated.
+
+The type labels an operation; it does not evaluate values or build a database query. The consumer defines supported field/operator combinations, type conversion, null behavior, string comparison rules, and the meaning of `Exists`. Translate operators through an explicit allowlist and parameterize comparison values—never concatenate request fields, operators, or values into SQL or another query language.
